@@ -6,7 +6,11 @@ PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
     conn, addr = s.accept()
+    print(f"Hostname: {hostname}")
+    print(f"IP Address: {ip_address}")
     with conn:
         print('Connected by', addr)
         while True:
